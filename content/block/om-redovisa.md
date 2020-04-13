@@ -1,3 +1,3 @@
 #### Redovisa på GitHub
 
-Skriv något kort om ditt redovisa-repo och länka till [repot för me/redovisa på GitHub](XXX).
+All kod som den här webbplatsen omfattar finns också i [repot för me/redovisa på GitHub](https://github.com/mipodi/reports-oophp).

@@ -1,27 +1,19 @@
 ---
-title: "Min fina titel"
+title: "Me-sidan"
 ---
-Min me-sida i kursen oophp
+Hej!
 =========================
 
-Detta innehåll är skrivet i markdown och du hittar innehållet i filen `content/index.md`.
 
-[FIGURE src="image/me.jpg?w=400&a=4,27,11,0&cf&sharpen" class="right" caption="Bild på mig, ätandes glass och hållandes ett kort på någon jultillställning."]
 
-Detta är min me-sida i kursen. Denna sidan innehåller en presentation av mig själv. Underhåll denna sidan under hela kursen och uppdatera den efter hand och behov.
+[FIGURE src="image/jellyfish.jpg" class="right" caption="En manet."]
 
-Så, en presentation en bra början. Skriv några ord om dig själv. Jag börjar.
+Det här är en me-sida i en kurs på Blekinge Tekniska Högskola och jag heter Julia Johansson. En me-sida funkar som en logg och reflektion kombinerat meda testmiljö under kursens gång.
 
-Mitt namn är Mikael Roos. Född och uppvuxen i Bankeryd, Småland, strax utanför Jönköping, i ett villaområde som byggdes upp samtidigt som vi flyttade in där. Jag gillade landhockey och har spelat bandy och hockey samt gått bowlinggymnasiet i Nässjö. Jag har varit städare, diskare, kallskänka, servitör och kock. På ett bananskal landade jag i Ronneby när jag började högskolan 1990 där och nu är jag kvar med fru, barn och så vidare.
+Jag började läsa PC-tidningen när jag var liten men det är rätt oklart om den hade positiv inverkan på mig. Den hjälpte i alla fall till att optimera familjedatorn och rensa virus. Först ca 20 år senare gjorde jag slag i saken och började lära mig programmering ordentligt.
 
-Programmering har alltid intresserat mig sedan 13-årsåldern och min första dator var en Spectravideo 328 med bandspelare.
+När jag inte programmerar gör jag olika projekt relaterade till visualisering. Natur och teknik ligger mig varmt om hjärtat och en frilanstillvaro funkar fint för mig. Det var en rejäl allitteration där.
 
-Om jag skall nämna någon hobby, förutom webbprogrammering, så får det bli att bära sten på sommarstugetomten, och det finns sten så det räcker och blir över.
-
-Till och från får jag för mig att börja på lite hobbies, ett år satsade jag på pokerspel, ett annat år var det geocaching, sedan turfing och nu på sistone verkar släktforskning lite spännande. Annars kan jag alltid koda på något av mina opensource-projekt, det finns och blir över.
-
-Vill du läsa mer om vad jag jobbat med så kan du kika på min [Linkedin-profil](https://www.linkedin.com/in/pt90mr/).
+Övriga intressen består till exempel av science fiction, tårtor och gärna maneter.
 
 Vi syns och hörs i forum och chatt!
-
-/Mikael

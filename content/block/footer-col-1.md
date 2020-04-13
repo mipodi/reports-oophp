@@ -1,3 +1,3 @@
-#### Footer col 1
+#### Maneter
 
-Med brödtext i ett stycke som säger något trevligt om just detta block, eller kanske en lista av länkar.
+En bra början för ett manetintresse är att läsa lite på [Wikipedia](https://en.wikipedia.org/wiki/Scyphozoa).

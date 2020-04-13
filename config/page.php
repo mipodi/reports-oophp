@@ -20,7 +20,9 @@ return [
             "lang" => "sv",
             "stylesheets" => [
                 // Change here to set another default stylesheet
-                "css/dbwebb-se.min.css",
+                // "css/dbwebb-se.min.css",
+                "css/oophp-base.min.css",
+                // "css/basic-style.min.css",
                 //"css/another.min.css",
             ],
             "javascripts" => [
