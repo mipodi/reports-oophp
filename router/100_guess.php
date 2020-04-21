@@ -27,6 +27,7 @@ $app->router->get("guess/play", function () use ($app) {
     ];
 
     $app->page->add("guess/play", $data);
+    $app->page->add("guess/debug");
 
     return $app->page->render([
         "title" => $title,
