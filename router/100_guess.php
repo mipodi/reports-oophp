@@ -11,6 +11,9 @@
  */
 $app->router->get("guess/init", function () use ($app) {
     // Init the session for the game start.
+    $game = new Mipodi\Guess\Guess();
+    $_SESSION["number"] = $game->number();
+    $_SESSION["tries"] = $game->tries();
     return $app->response->redirect("guess/play");
 });
 
