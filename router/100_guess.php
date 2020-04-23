@@ -47,7 +47,7 @@ $app->router->get("guess/play", function () use ($app) {
     ];
 
     $app->page->add("guess/play", $data);
-    $app->page->add("guess/debug");
+    // $app->page->add("guess/debug");
 
     return $app->page->render([
         "title" => $title,
@@ -72,11 +72,10 @@ $app->router->post("guess/make-guess", function () use ($app) {
         $doInit     = null;
         $doGuess    = null;
         $doCheat    = null;
-
     } elseif ($doGuess) {
         try {
             $res = $game->makeGuess($guess);
-        } catch ( Mipodi\Guess\GuessException $e) {
+        } catch (Mipodi\Guess\GuessException $e) {
                 // echo "Got exception: " . get_class($e) . "<hr>";
             $res = "INVALID. Please enter above 1 or below 100.";
         }
