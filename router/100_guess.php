@@ -19,7 +19,6 @@ $app->router->get("guess/init", function () use ($app) {
 });
 
 
-
 /**
  * Play the game.
  */
