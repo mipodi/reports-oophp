@@ -92,6 +92,7 @@ class Guess
     {
         // var_dump($guess);
         // var_dump($this->number);
+        // $guess = intval($guess);
 
         if ($guess < 1 || $guess > 100) {
             throw new GuessException("Guess is only allowed integer between 1 and 100");
