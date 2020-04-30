@@ -64,6 +64,7 @@ class Dice
      */
     public function results()
     {
+        // $this->throwResults = [];
         return $this->throwResults;
     }
 
