@@ -12,10 +12,11 @@ class DiceGame
      * @var int $values     Array consisting of last roll of the dices.
      */
     private $dices;
+    private $tempPoints;
     private $values;
     private $humanPlayerScore;
     private $computerPlayerScore;
-    private $gameStatus;
+    // private $gameStatus;
 
     /**
      * Constructor to initiate the dice game with a number of players.
@@ -29,6 +30,7 @@ class DiceGame
 
         $this->humanPlayerScore     = 0;
         $this->computerPlayerScore  = 0;
+        $this->$tempPoints          = 0;
 
         $this->gameStatus = 0;
 
@@ -45,14 +47,47 @@ class DiceGame
     }
 
     /**
-     * Save point values to the record.
+     * Check if
      *
      * @return void.
      */
-    public function play()
+    public function play($gameStatus)
     {
+        var_dump($gameStatus);
 
-        
+        if ($gameStatus === "Roll") {
+            // echo "hello";
+            $dice = new DiceGraphic();
+            $rolls = 2;
+            $res = [];
+            $class = [];
+
+            for ($i = 0; $i < $rolls; $i++) {
+                // $res[] = $dice->roll();
+                $dice->roll();
+                $class[] = $dice->graphic();
+            }
+
+            $res = $dice->results();
+            if (in_array(1, $res)) {
+                $this->tempPoints = 0;
+            }
+
+            $this->tempPoints += array_sum($res);
+            return $res;
+
+        } elseif ($gameStatus === "Save") {
+            // $diceGame->save($res);
+            var_dump($this->tempPoints);
+
+            $this->computerPlayerScore += $this->tempPoints;
+            // $score = $this->values;
+            // $this->computerPlayerScore += $score;
+            var_dump($this->computerPlayerScore);
+            // $this->values = [];
+            // var_dump($this->values);
+        }
+
     }
 
     /**

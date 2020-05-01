@@ -19,18 +19,18 @@ namespace Anax\View;
 
 
 
-<p>
-<?php foreach ($class as $value) : ?>
-    <i class="dice-sprite <?= $value ?>"></i>
-<?php endforeach; ?>
-</p>
+<!-- <p>
+<?#php foreach ($class as $value) : ?>
+    <i class="dice-sprite <?#= $value ?>"></i>
+<?#php endforeach; ?>
+</p> -->
 
 
 <div class="container">
     <!-- eller döpa nedan action till change-turn?? -->
 <form method="post" action="play">
-    <input type="hidden" name="number" value="<?#= $number?>">
-    <input type="hidden" name="tries" value="<?#= $tries?>">
+    <!-- <input type="hidden" name="number" value="<?#= $number?>"> -->
+    <!-- <input type="hidden" name="tries" value="<?#= $tries?>"> -->
 
     <input class="rollBtn" type="submit" name="doRoll" value="Roll">
     <input class="saveBtn" type="submit" name="doSave" value="Save">
