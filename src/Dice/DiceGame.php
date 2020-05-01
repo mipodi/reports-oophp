@@ -11,9 +11,9 @@ class DiceGame
      * @var DiceHand $diceHands     Array consisting of dices.
      * @var int $values     Array consisting of last roll of the dices.
      */
-    private $dices;
+    // private $dices;
     private $tempPoints;
-    private $values;
+    // private $values;
     private $humanPlayerScore;
     private $computerPlayerScore;
     private $winner;
@@ -27,7 +27,7 @@ class DiceGame
     {
         $this->humanPlayerScore     = 0;
         $this->computerPlayerScore  = 0;
-        $this->$tempPoints          = 0;
+        // $this->$tempPoints          = 0;
         $this->winner               = null;
 
         for ($i = 0; $i < $players; $i++) {
@@ -71,58 +71,56 @@ class DiceGame
 
             $this->tempPoints += array_sum($res);
             return $res;
-
         } elseif ($gameStatus === "Save") {
             $this->humanPlayerScore += $this->tempPoints;
             var_dump($this->humanPlayerScore);
             $this->tempPoints = 0;
             $this->playByComputer();
         }
-
     }
 
-        /**
-         * Check if
-         *
-         * @return void.
-         */
-        public function playByComputer()
-        {
-            echo "I'm the computer and I'm playing.";
-            $dice = new DiceGraphic();
-            $rolls = 2;
-            $res = [];
-            $class = [];
+    /**
+     * Check if
+     *
+     * @return void.
+     */
+    public function playByComputer()
+    {
+        echo "I'm the computer and I'm playing.";
+        $dice = new DiceGraphic();
+        $rolls = 2;
+        $res = [];
+        $class = [];
 
-            for ($i = 0; $i < $rolls; $i++) {
-                // $res[] = $dice->roll();
-                $dice->roll();
-                $class[] = $dice->graphic();
-            }
+        for ($i = 0; $i < $rolls; $i++) {
+            // $res[] = $dice->roll();
+            $dice->roll();
+            $class[] = $dice->graphic();
+        }
 
-            $res = $dice->results();
+        $res = $dice->results();
 
-            if ($this->computerPlayerScore += array_sum($res) >=10) {
-                $res = 0;
-                $this->finishGame();
-                return $res;
-            }
-
-            if (in_array(1, $res)) {
-                $this->tempPoints = 0;
-                var_dump($this->tempPoints);
-                $res = 0;
-                return $res;
-            }
-
-            $this->tempPoints += array_sum($res);
-            $this->computerPlayerScore += $this->tempPoints;
-            var_dump("Computer score" . $this->computerPlayerScore);
-            $this->tempPoints = 0;
-
-            $res = null;
+        if ($this->computerPlayerScore += array_sum($res) >=10) {
+            $res = 0;
+            $this->finishGame();
             return $res;
         }
+
+        if (in_array(1, $res)) {
+            $this->tempPoints = 0;
+            var_dump($this->tempPoints);
+            $res = 0;
+            return $res;
+        }
+
+        $this->tempPoints += array_sum($res);
+        $this->computerPlayerScore += $this->tempPoints;
+        var_dump("Computer score" . $this->computerPlayerScore);
+        $this->tempPoints = 0;
+
+        $res = null;
+        return $res;
+    }
 
     /**
      * Save point values to the record.
@@ -136,7 +134,6 @@ class DiceGame
         $this->humanPlayerScore += $score;
         // ersätta delar av "human" med en parameter
         var_dump($this->humanPlayerScore);
-
     }
 
     /**

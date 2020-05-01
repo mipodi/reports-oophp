@@ -32,7 +32,7 @@ $app->router->get("dice/play", function () use ($app) {
     $title = "Play the game";
 
     $diceGame = $_SESSION["diceGame"];
-    $gameStatus = $_SESSION["doRoll"] ?? $_SESSION["doSave"];
+    $gameStatus = $_SESSION["doRoll"] ?? $_SESSION["doSave"] ?? null;
     $res = $diceGame->play($gameStatus);
 
     $doInit = $_SESSION["doInit"] ?? null;
