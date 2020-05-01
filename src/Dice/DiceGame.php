@@ -16,7 +16,7 @@ class DiceGame
     private $values;
     private $humanPlayerScore;
     private $computerPlayerScore;
-    // private $gameStatus;
+    private $winner;
 
     /**
      * Constructor to initiate the dice game with a number of players.
@@ -25,25 +25,15 @@ class DiceGame
      */
     public function __construct(int $players = 2)
     {
-        // $this->dices   = [];
-        // $this->values  = [];
-
         $this->humanPlayerScore     = 0;
         $this->computerPlayerScore  = 0;
         $this->$tempPoints          = 0;
-
-        $this->gameStatus = 0;
+        $this->winner               = null;
 
         for ($i = 0; $i < $players; $i++) {
             $this->players[]  = new DiceGraphic();
             $this->values[] = null;
         }
-
-        // for ($i = 0; $i < $dices; $i++) {
-        //     $this->dices[]  = new Dice();
-        //     // $this->values[] = null;
-        // }
-
     }
 
     /**
@@ -55,7 +45,9 @@ class DiceGame
     {
         var_dump($gameStatus);
 
-        if ($gameStatus === "Roll") {
+        if ($gameStatus === "Restart") {
+            $this->resetGame();
+        } elseif ($gameStatus === "Roll") {
             // echo "hello";
             $dice = new DiceGraphic();
             $rolls = 2;
@@ -71,24 +63,66 @@ class DiceGame
             $res = $dice->results();
             if (in_array(1, $res)) {
                 $this->tempPoints = 0;
+                var_dump($this->tempPoints);
+                // $res = 0;
+                $this->playByComputer();
+                // return $res;
             }
 
             $this->tempPoints += array_sum($res);
             return $res;
 
         } elseif ($gameStatus === "Save") {
-            // $diceGame->save($res);
-            var_dump($this->tempPoints);
-
-            $this->computerPlayerScore += $this->tempPoints;
-            // $score = $this->values;
-            // $this->computerPlayerScore += $score;
-            var_dump($this->computerPlayerScore);
-            // $this->values = [];
-            // var_dump($this->values);
+            $this->humanPlayerScore += $this->tempPoints;
+            var_dump($this->humanPlayerScore);
+            $this->tempPoints = 0;
+            $this->playByComputer();
         }
 
     }
+
+        /**
+         * Check if
+         *
+         * @return void.
+         */
+        public function playByComputer()
+        {
+            echo "I'm the computer and I'm playing.";
+            $dice = new DiceGraphic();
+            $rolls = 2;
+            $res = [];
+            $class = [];
+
+            for ($i = 0; $i < $rolls; $i++) {
+                // $res[] = $dice->roll();
+                $dice->roll();
+                $class[] = $dice->graphic();
+            }
+
+            $res = $dice->results();
+
+            if ($this->computerPlayerScore += array_sum($res) >=10) {
+                $res = 0;
+                $this->finishGame();
+                return $res;
+            }
+
+            if (in_array(1, $res)) {
+                $this->tempPoints = 0;
+                var_dump($this->tempPoints);
+                $res = 0;
+                return $res;
+            }
+
+            $this->tempPoints += array_sum($res);
+            $this->computerPlayerScore += $this->tempPoints;
+            var_dump("Computer score" . $this->computerPlayerScore);
+            $this->tempPoints = 0;
+
+            $res = null;
+            return $res;
+        }
 
     /**
      * Save point values to the record.
@@ -103,6 +137,69 @@ class DiceGame
         // ersätta delar av "human" med en parameter
         var_dump($this->humanPlayerScore);
 
+    }
+
+    /**
+     * Save point values to the record.
+     *
+     * @return int.
+     */
+    public function humanScore()
+    {
+        return $this->humanPlayerScore;
+    }
+
+    /**
+     * Save point values to the record.
+     *
+     * @return int.
+     */
+    public function computerScore()
+    {
+        return $this->computerPlayerScore;
+    }
+
+    /**
+     * Save point values to the record.
+     *
+     * @return int.
+     */
+    public function tempScore()
+    {
+        return $this->tempPoints;
+    }
+
+    /**
+     * Save point values to the record.
+     *
+     * @return void.
+     */
+    public function resetGame()
+    {
+        // echo "hello resets game";
+        $this->humanPlayerScore = 0;
+        $this->computerPlayerScore = 0;
+    }
+
+    /**
+     * Save point values to the record.
+     *
+     * @return void.
+     */
+    public function finishGame()
+    {
+        // echo "hello resets game";
+        $this->winner = "We have a winner!";
+    }
+
+    /**
+     * Save point values to the record.
+     *
+     * @return void.
+     */
+    public function isWinner()
+    {
+        return $this->winner;
     }
     //
     //

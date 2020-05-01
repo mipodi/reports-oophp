@@ -34,7 +34,7 @@ namespace Anax\View;
 
     <input class="rollBtn" type="submit" name="doRoll" value="Roll">
     <input class="saveBtn" type="submit" name="doSave" value="Save">
-    <input class="restartBtn" type="submit" name="doInit" value="Start over">
+    <input class="restartBtn" type="submit" name="doInit" value="Restart">
 
 </form>
 
@@ -43,7 +43,12 @@ namespace Anax\View;
 
 <?php if ($res) : ?>
     <p>Your thrown dices: <?= implode(", ", $res) ?></p>
-    <p>Your points: <?= array_sum($res) ?>.</p>
+    <!-- <p>Your points: <#?= array_sum($res) ?>.</p> -->
+    <p>Your points: <?= $tempScore ?>.</p>
+<?php endif; ?>
+
+<?php if ($winner) : ?>
+    <p><?= $winner ?></p>
 <?php endif; ?>
 
 <!-- <p>Average is: <?#= round(array_sum($res)/$rolls) ?>.</p> -->
