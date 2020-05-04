@@ -18,7 +18,6 @@ namespace Anax\View;
 <p>Computer player: <?= $computerScore ?></p>
 
 
-
 <!-- <p>
 <?#php foreach ($class as $value) : ?>
     <i class="dice-sprite <?#= $value ?>"></i>
@@ -32,8 +31,10 @@ namespace Anax\View;
     <!-- <input type="hidden" name="number" value="<?#= $number?>"> -->
     <!-- <input type="hidden" name="tries" value="<?#= $tries?>"> -->
 
+<?php if (!$winner) : ?>
     <input class="rollBtn" type="submit" name="doRoll" value="Roll">
     <input class="saveBtn" type="submit" name="doSave" value="Save">
+<?php endif; ?>
     <input class="restartBtn" type="submit" name="doInit" value="Restart">
 
 </form>
@@ -41,10 +42,22 @@ namespace Anax\View;
 
 </div>
 
-<?php if ($res) : ?>
-    <p>Your thrown dices: <?= implode(", ", $res) ?></p>
+
+
+<?php if ($humanLatestRoll) : ?>
+    <p>Your thrown dices: <?= implode(", ", $humanLatestRoll) ?></p>
     <!-- <p>Your points: <#?= array_sum($res) ?>.</p> -->
+    <?php if ($tempScore) : ?>
     <p>Your points: <?= $tempScore ?>.</p>
+    <?php endif; ?>
+
+<?php endif; ?>
+
+<?php if ($computerLatestRoll) : ?>
+    <p> Computer played: <?= implode(", ", $computerLatestRoll) ?></p>
+    <?php if (!$winner) : ?>
+        <p> Your turn again &rarr; </p>
+    <?php endif; ?>
 <?php endif; ?>
 
 <?php if ($winner) : ?>

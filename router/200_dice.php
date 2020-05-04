@@ -30,10 +30,12 @@ $app->router->get("dice/init", function () use ($app) {
  */
 $app->router->get("dice/play", function () use ($app) {
     $title = "Play the game";
+    // $computerLatestRoll = null;
+    $humanLatestRoll = null;
 
     $diceGame = $_SESSION["diceGame"];
     $gameStatus = $_SESSION["doRoll"] ?? $_SESSION["doSave"] ?? null;
-    $res = $diceGame->play($gameStatus);
+    $diceGame->play($gameStatus);
 
     $doInit = $_SESSION["doInit"] ?? null;
 
@@ -44,15 +46,19 @@ $app->router->get("dice/play", function () use ($app) {
     $tempScore = $diceGame->tempScore();
     $humanScore = $diceGame->humanScore();
     $computerScore = $diceGame->computerScore();
+    $humanLatestRoll = $diceGame->getHumanLatestRoll() ?? null;
+    $computerLatestRoll = $diceGame->getComputerLatestRoll() ?? null;
     $winner = $diceGame->isWinner() ?? null;
 
     $data = [
         // "class" => $class,
         // "rolls" => $rolls,
-        "res" => $res,
+        // "res" => $res,
         "humanScore" => $humanScore,
         "computerScore" => $computerScore,
         "tempScore" => $tempScore,
+        "computerLatestRoll" => $computerLatestRoll,
+        "humanLatestRoll" => $humanLatestRoll,
         "winner" => $winner
     ];
 

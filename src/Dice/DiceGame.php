@@ -17,6 +17,8 @@ class DiceGame
     private $humanPlayerScore;
     private $computerPlayerScore;
     private $winner;
+    private $humanLatestRoll;
+    private $computerLatestRoll;
 
     /**
      * Constructor to initiate the dice game with a number of players.
@@ -29,6 +31,8 @@ class DiceGame
         $this->computerPlayerScore  = 0;
         // $this->$tempPoints          = 0;
         $this->winner               = null;
+        $this->$humanLatestRoll     = null;
+        $this->$computerLatestRoll  = null;
 
         for ($i = 0; $i < $players; $i++) {
             $this->players[]  = new DiceGraphic();
@@ -44,6 +48,9 @@ class DiceGame
     public function play($gameStatus)
     {
         var_dump($gameStatus);
+        // $this->tempPoints = 0;
+
+        $this->computerLatestRoll = null;
 
         if ($gameStatus === "Restart") {
             $this->resetGame();
@@ -61,20 +68,30 @@ class DiceGame
             }
 
             $res = $dice->results();
+            $this->humanLatestRoll = $res;
+
             if (in_array(1, $res)) {
                 $this->tempPoints = 0;
                 var_dump($this->tempPoints);
                 // $res = 0;
                 $this->playByComputer();
-                // return $res;
+                return;
             }
 
             $this->tempPoints += array_sum($res);
             return $res;
         } elseif ($gameStatus === "Save") {
-            $this->humanPlayerScore += $this->tempPoints;
             var_dump($this->humanPlayerScore);
-            $this->tempPoints = 0;
+            var_dump($this->tempPoints);
+            $this->humanPlayerScore += $this->tempPoints;
+
+            // if ($this->humanPlayerScore >= 10) {
+            //     $this->finishGame();
+            //     return;
+            // }
+
+            var_dump($this->humanPlayerScore);
+            $this->tempPoints = null;
             $this->playByComputer();
         }
     }
@@ -100,23 +117,28 @@ class DiceGame
 
         $res = $dice->results();
 
-        if ($this->computerPlayerScore += array_sum($res) >=10) {
-            $res = 0;
+        if ($this->computerPlayerScore += array_sum($res) >= 10) {
+            // $res = 0;
+            $this->computerLatestRoll = $res;
+            $this->tempPoints += array_sum($res);
+            $this->computerPlayerScore += $this->tempPoints;
+            $res = null;
             $this->finishGame();
-            return $res;
+            return;
         }
 
         if (in_array(1, $res)) {
-            $this->tempPoints = 0;
+            $this->tempPoints = null;
             var_dump($this->tempPoints);
-            $res = 0;
+            $this->computerLatestRoll = $res;
             return $res;
         }
 
+        $this->computerLatestRoll = $res;
         $this->tempPoints += array_sum($res);
         $this->computerPlayerScore += $this->tempPoints;
         var_dump("Computer score" . $this->computerPlayerScore);
-        $this->tempPoints = 0;
+        $this->tempPoints = null;
 
         $res = null;
         return $res;
@@ -161,6 +183,27 @@ class DiceGame
      *
      * @return int.
      */
+    public function getHumanLatestRoll()
+    {
+        return $this->humanLatestRoll;
+    }
+
+
+    /**
+     * Save point values to the record.
+     *
+     * @return int.
+     */
+    public function getComputerLatestRoll()
+    {
+        return $this->computerLatestRoll;
+    }
+
+    /**
+     * Save point values to the record.
+     *
+     * @return int.
+     */
     public function tempScore()
     {
         return $this->tempPoints;
@@ -186,7 +229,7 @@ class DiceGame
     public function finishGame()
     {
         // echo "hello resets game";
-        $this->winner = "We have a winner!";
+        $this->winner = "Game over!";
     }
 
     /**
