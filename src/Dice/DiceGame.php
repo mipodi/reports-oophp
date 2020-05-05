@@ -3,7 +3,7 @@
 namespace Mipodi\Dice;
 
 /**
- * A dicehand, consists of dices.
+ * Dice game, orchestrates a game of dices.
  */
 class DiceGame
 {
@@ -12,13 +12,13 @@ class DiceGame
      * @var int $values     Array consisting of last roll of the dices.
      */
     // private $dices;
-    private $tempPoints;
     // private $values;
     private $humanPlayerScore;
     private $computerPlayerScore;
-    private $winner;
+    private $tempPoints;
     private $humanLatestRoll;
     private $computerLatestRoll;
+    private $winner;
 
     /**
      * Constructor to initiate the dice game with a number of players.
@@ -34,20 +34,20 @@ class DiceGame
         $this->$humanLatestRoll     = null;
         $this->$computerLatestRoll  = null;
 
-        for ($i = 0; $i < $players; $i++) {
-            $this->players[]  = new DiceGraphic();
-            $this->values[] = null;
-        }
+        // for ($i = 0; $i < $players; $i++) {
+        //     $this->players[]  = new DiceGraphic();
+        //     $this->values[] = null;
+        // }
     }
 
     /**
-     * Check if
+     * Run the game with human player as base
      *
      * @return void.
      */
     public function play($gameStatus)
     {
-        var_dump($gameStatus);
+        // var_dump($gameStatus);
         // $this->tempPoints = 0;
 
         $this->computerLatestRoll = null;
@@ -72,7 +72,7 @@ class DiceGame
 
             if (in_array(1, $res)) {
                 $this->tempPoints = 0;
-                var_dump($this->tempPoints);
+                // var_dump($this->tempPoints);
                 // $res = 0;
                 $this->playByComputer();
                 return;
@@ -81,16 +81,16 @@ class DiceGame
             $this->tempPoints += array_sum($res);
             return $res;
         } elseif ($gameStatus === "Save") {
-            var_dump($this->humanPlayerScore);
-            var_dump($this->tempPoints);
+            // var_dump($this->humanPlayerScore);
+            // var_dump($this->tempPoints);
             $this->humanPlayerScore += $this->tempPoints;
 
-            // if ($this->humanPlayerScore >= 10) {
-            //     $this->finishGame();
-            //     return;
-            // }
+            if ($this->humanPlayerScore >= 100) {
+                $this->finishGame();
+                return;
+            }
 
-            var_dump($this->humanPlayerScore);
+            // var_dump($this->humanPlayerScore);
             $this->tempPoints = null;
             $this->playByComputer();
         }
@@ -117,7 +117,7 @@ class DiceGame
 
         $res = $dice->results();
 
-        if ($this->computerPlayerScore += array_sum($res) >= 10) {
+        if ($this->computerPlayerScore += array_sum($res) >= 100) {
             // $res = 0;
             $this->computerLatestRoll = $res;
             $this->tempPoints += array_sum($res);
@@ -129,7 +129,7 @@ class DiceGame
 
         if (in_array(1, $res)) {
             $this->tempPoints = null;
-            var_dump($this->tempPoints);
+            // var_dump($this->tempPoints);
             $this->computerLatestRoll = $res;
             return $res;
         }
@@ -137,26 +137,26 @@ class DiceGame
         $this->computerLatestRoll = $res;
         $this->tempPoints += array_sum($res);
         $this->computerPlayerScore += $this->tempPoints;
-        var_dump("Computer score" . $this->computerPlayerScore);
+        // var_dump("Computer score" . $this->computerPlayerScore);
         $this->tempPoints = null;
 
         $res = null;
         return $res;
     }
 
-    /**
-     * Save point values to the record.
-     *
-     * @return void.
-     */
-    public function save($score)
-    {
-        // $score = implode(", ", $this->values);
-        $score = array_sum($score);
-        $this->humanPlayerScore += $score;
-        // ersätta delar av "human" med en parameter
-        var_dump($this->humanPlayerScore);
-    }
+    // /**
+    //  * Save point values to the record.
+    //  *
+    //  * @return void.
+    //  */
+    // public function save($score)
+    // {
+    //     // $score = implode(", ", $this->values);
+    //     $score = array_sum($score);
+    //     $this->humanPlayerScore += $score;
+    //     // ersätta delar av "human" med en parameter
+    //     var_dump($this->humanPlayerScore);
+    // }
 
     /**
      * Save point values to the record.

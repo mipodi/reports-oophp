@@ -79,7 +79,6 @@ $app->router->post("dice/play", function () use ($app) {
     $_SESSION["doSave"] = $_POST["doSave"];
     $_SESSION["doRoll"] = $_POST["doRoll"];
     $_SESSION["doInit"] = $_POST["doInit"];
-    // $_SESSION["res"] = $_POST["res"];
 
     return $app->response->redirect("dice/play");
 });
