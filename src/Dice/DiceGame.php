@@ -103,7 +103,7 @@ class DiceGame
      */
     public function playByComputer()
     {
-        echo "I'm the computer and I'm playing.";
+        // echo "I'm the computer and I'm playing.";
         $dice = new DiceGraphic();
         $rolls = 2;
         $res = [];
@@ -118,6 +118,8 @@ class DiceGame
         $res = $dice->results();
 
         if ($this->computerPlayerScore += array_sum($res) >= 100) {
+            // Varför går den in i den här ifsatsen över 10?
+            var_dump($this->computerPlayerScore += array_sum($res));
             // $res = 0;
             $this->computerLatestRoll = $res;
             $this->tempPoints += array_sum($res);
