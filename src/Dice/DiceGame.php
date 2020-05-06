@@ -25,14 +25,14 @@ class DiceGame
      *
      * @param int $dices Number of dices to create, defaults to five.
      */
-    public function __construct(int $players = 2)
+    public function __construct()
     {
         $this->humanPlayerScore     = 0;
         $this->computerPlayerScore  = 0;
         // $this->$tempPoints          = 0;
         $this->winner               = null;
-        $this->$humanLatestRoll     = null;
-        $this->$computerLatestRoll  = null;
+        // $this->$humanLatestRoll     = null;
+        // $this->$computerLatestRoll  = null;
 
         // for ($i = 0; $i < $players; $i++) {
         //     $this->players[]  = new DiceGraphic();
@@ -138,20 +138,15 @@ class DiceGame
             $this->computerLatestRoll = $res;
             $this->tempPoints = null;
         } elseif (!in_array(1, $res)) {
-            // den här utför beräkningen också ju
             if (($this->computerPlayerScore + array_sum($res)) >= 100) {
-                // echo $this->computerPlayerScore += array_sum($res);
-                // $res = [];
-                // ÄH VA FAN, nånstans sparas tärningarna i närminnet
                 $this->finishGame();
             }
             $this->tempPoints += array_sum($res);
-            var_dump($this->tempPoints);
+            // var_dump($this->tempPoints);
             $this->computerLatestRoll = $res;
             $this->computerPlayerScore += $this->tempPoints;
             $this->tempPoints = null;
         }
-
     }
 
     // /**

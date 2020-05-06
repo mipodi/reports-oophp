@@ -77,7 +77,7 @@ $app->router->get("dice/play", function () use ($app) {
     ];
 
     $app->page->add("dice/play", $data);
-    $app->page->add("dice/debug");
+    // $app->page->add("dice/debug");
 
     return $app->page->render([
         "title" => $title,
