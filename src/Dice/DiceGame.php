@@ -71,7 +71,7 @@ class DiceGame
             $this->humanLatestRoll = $res;
 
             if (in_array(1, $res)) {
-                $this->tempPoints = null;
+                $this->tempPoints = 0;
                 // var_dump($this->tempPoints);
                 // $res = 0;
                 $this->playByComputer();
@@ -91,7 +91,7 @@ class DiceGame
             }
 
             // var_dump($this->humanPlayerScore);
-            $this->tempPoints = null;
+            $this->tempPoints = 0;
             $this->playByComputer();
         }
     }
@@ -103,7 +103,7 @@ class DiceGame
      */
     public function playByComputer()
     {
-        $this->tempPoints = null;
+        $this->tempPoints = 0;
         // echo "I'm the computer and I'm playing.";
         $dice = new DiceGraphic();
         $rolls = 2;
@@ -118,25 +118,10 @@ class DiceGame
 
         $res = $dice->results();
 
-
-
-        // if (($this->computerPlayerScore += array_sum($res)) >= 100) {
-        //     // Varför går den in i den här ifsatsen över 10?
-        //     // echo "WHY OH WHY???";
-        //     // var_dump($this->computerPlayerScore += array_sum($res));
-        //     // $res = 0;
-        //     $this->computerLatestRoll = $res;
-        //     $this->tempPoints += array_sum($res);
-        //     $this->computerPlayerScore += $this->tempPoints;
-        //     $res = null;
-        //     $this->finishGame();
-        //     return;
-        // }
-
         if (in_array(1, $res)) {
             // var_dump($this->tempPoints);
             $this->computerLatestRoll = $res;
-            $this->tempPoints = null;
+            $this->tempPoints = 0;
         } elseif (!in_array(1, $res)) {
             if (($this->computerPlayerScore + array_sum($res)) >= 100) {
                 $this->finishGame();
@@ -145,7 +130,7 @@ class DiceGame
             // var_dump($this->tempPoints);
             $this->computerLatestRoll = $res;
             $this->computerPlayerScore += $this->tempPoints;
-            $this->tempPoints = null;
+            $this->tempPoints = 0;
         }
     }
 
