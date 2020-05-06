@@ -71,7 +71,7 @@ class DiceGame
             $this->humanLatestRoll = $res;
 
             if (in_array(1, $res)) {
-                $this->tempPoints = 0;
+                $this->tempPoints = null;
                 // var_dump($this->tempPoints);
                 // $res = 0;
                 $this->playByComputer();
@@ -103,6 +103,7 @@ class DiceGame
      */
     public function playByComputer()
     {
+        $this->tempPoints = null;
         // echo "I'm the computer and I'm playing.";
         $dice = new DiceGraphic();
         $rolls = 2;
@@ -117,33 +118,40 @@ class DiceGame
 
         $res = $dice->results();
 
-        if ($this->computerPlayerScore += array_sum($res) >= 100) {
-            // Varför går den in i den här ifsatsen över 10?
-            var_dump($this->computerPlayerScore += array_sum($res));
-            // $res = 0;
-            $this->computerLatestRoll = $res;
-            $this->tempPoints += array_sum($res);
-            $this->computerPlayerScore += $this->tempPoints;
-            $res = null;
-            $this->finishGame();
-            return;
-        }
+
+
+        // if (($this->computerPlayerScore += array_sum($res)) >= 100) {
+        //     // Varför går den in i den här ifsatsen över 10?
+        //     // echo "WHY OH WHY???";
+        //     // var_dump($this->computerPlayerScore += array_sum($res));
+        //     // $res = 0;
+        //     $this->computerLatestRoll = $res;
+        //     $this->tempPoints += array_sum($res);
+        //     $this->computerPlayerScore += $this->tempPoints;
+        //     $res = null;
+        //     $this->finishGame();
+        //     return;
+        // }
 
         if (in_array(1, $res)) {
-            $this->tempPoints = null;
             // var_dump($this->tempPoints);
             $this->computerLatestRoll = $res;
-            return $res;
+            $this->tempPoints = null;
+        } elseif (!in_array(1, $res)) {
+            // den här utför beräkningen också ju
+            if (($this->computerPlayerScore + array_sum($res)) >= 100) {
+                // echo $this->computerPlayerScore += array_sum($res);
+                // $res = [];
+                // ÄH VA FAN, nånstans sparas tärningarna i närminnet
+                $this->finishGame();
+            }
+            $this->tempPoints += array_sum($res);
+            var_dump($this->tempPoints);
+            $this->computerLatestRoll = $res;
+            $this->computerPlayerScore += $this->tempPoints;
+            $this->tempPoints = null;
         }
 
-        $this->computerLatestRoll = $res;
-        $this->tempPoints += array_sum($res);
-        $this->computerPlayerScore += $this->tempPoints;
-        // var_dump("Computer score" . $this->computerPlayerScore);
-        $this->tempPoints = null;
-
-        $res = null;
-        return $res;
     }
 
     // /**
