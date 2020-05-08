@@ -94,5 +94,10 @@ return [
             "url" => "dice-game",
             "title" => "Play Dice 100",
         ],
+        [
+            "text" => "Dice Deluxe",
+            "url" => "dice-deluxe",
+            "title" => "Play Dice Deluxe",
+        ],
     ],
 ];
