@@ -43,6 +43,7 @@ class Dice
             $this->throwResults[] = rand(1, 6);
         }
         $this->lastRoll = end($this->throwResults);
+        // var_dump("hello");
         return $this->throwResults;
     }
 

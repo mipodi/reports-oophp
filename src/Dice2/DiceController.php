@@ -137,6 +137,21 @@ class DiceController implements AppInjectableInterface
         $humanLatestRoll = $diceGame->getHumanLatestRoll() ?? null;
         $computerLatestRoll = $diceGame->getComputerLatestRoll() ?? null;
         $winner = $diceGame->isWinner() ?? null;
+        $humanHistogram = $diceGame->humanThrows() ?? null;
+        $computerHistogram = $diceGame->computerThrows() ?? null;
+
+        // $histogram = $diceGame->testInterface() ?? null;
+        $doSave = $this->app->session->get("doSave");
+        $doRoll = $this->app->session->get("doRoll");
+
+        if ($doSave || $doRoll) {
+            $humanHistogram = $diceGame->printHumanHistogram(1, 8) ?? null;
+            $computerHistogram = $diceGame->printComputerHistogram(1, 8) ?? null;
+        } else {
+            $humanHistogram = null;
+            $computerHistogram = null;
+            // $histogram = null;
+        }
 
         $data = [
             // "class" => $class,
@@ -147,7 +162,10 @@ class DiceController implements AppInjectableInterface
             "tempScore" => $tempScore,
             "computerLatestRoll" => $computerLatestRoll,
             "humanLatestRoll" => $humanLatestRoll,
-            "winner" => $winner
+            "winner" => $winner,
+            "humanHistogram" => $humanHistogram,
+            "computerHistogram" => $computerHistogram
+            // "histogram" => $histogram
         ];
 
         $this->app->page->add("dice2/play", $data);

@@ -64,4 +64,33 @@ namespace Anax\View;
     <p><?= $winner ?></p>
 <?php endif; ?>
 
+
+<!-- <?#php if ($humanHistogram) : ?>
+     <p>Human histogram basis: <?#= implode(", ", $humanHistogram) ?></p> -->
+    <!-- <p>Human histogram basis: <?#= $humanHistogram ?></p> -->
+    <!-- <pre><?#= $diceGame->printHistogram() ?></pre> -->
+
+<!-- <?#php endif; ?> -->
+
+<!-- <#?php if ($computerHistogram) : ?>
+    <p>Computer histogram basis: <?#= implode(", ", $computerHistogram) ?></p>
+<?#php endif; ?> -->
+
+<!-- <?#php if ($histogram) : ?>
+    <pre><?#= $histogram?></pre>
+<?#php endif; ?> -->
+
+<?php if ($humanHistogram) : ?>
+    <h3>Human histogram</h3>
+    <pre><?= $humanHistogram?></pre>
+<?php endif; ?>
+
+<?php if ($computerHistogram) : ?>
+    <h3>Computer histogram</h3>
+    <pre><?= $computerHistogram?></pre>
+<?php endif; ?>
+
+<!-- <p><?#= implode(", ", $histogram->getSerie()) ?></p>
+<pre><?#= $histogram->getAsText(1, 6) ?></pre> -->
+
 <!-- <p>Average is: <?#= round(array_sum($res)/$rolls) ?>.</p> -->
