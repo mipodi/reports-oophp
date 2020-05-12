@@ -36,7 +36,7 @@ class Dice
      *
      * @return void
      */
-    public function roll(int $throws = 1)
+    public function roll()
     {
         // $this->throwResults = [];
         $throws = 1;

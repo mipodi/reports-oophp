@@ -64,7 +64,6 @@ class DiceGame
         if ($gameStatus === "Restart") {
             $this->resetGame();
         } elseif ($gameStatus === "Roll") {
-
             foreach ($this->humanDices as $value) {
                 $this->humanThrows[] = $value->rollDice2();
                 $this->humanHistogram->injectData($value);
@@ -86,7 +85,8 @@ class DiceGame
             $this->humanPlayerScore += $this->tempPoints;
 
             if ($this->humanPlayerScore >= 100) {
-                $this->finishGame();
+                // $this->finishGame();
+                $this->winner = "Game over!";
                 return;
             }
 
@@ -94,7 +94,6 @@ class DiceGame
             $this->playByComputer();
         }
         // $histogram->injectData($dice);
-
     }
 
     /**
@@ -116,7 +115,8 @@ class DiceGame
             $this->tempPoints = 0;
         } elseif (!in_array(1, $res)) {
             if (($this->computerPlayerScore + array_sum($res)) >= 100) {
-                $this->finishGame();
+                // $this->finishGame();
+                $this->winner = "Game over!";
             }
 
             if ($this->humanPlayerScore > $this->computerPlayerScore) {
@@ -200,16 +200,16 @@ class DiceGame
         $this->computerPlayerScore = 0;
     }
 
-    /**
-     * If finish game this runs and adds Game Over string to $winner.
-     *
-     * @return void.
-     */
-    public function finishGame()
-    {
-        // echo "hello resets game";
-        $this->winner = "Game over!";
-    }
+    // /**
+    //  * If finish game this runs and adds Game Over string to $winner.
+    //  *
+    //  * @return void.
+    //  */
+    // public function finishGame()
+    // {
+    //     // echo "hello resets game";
+    //     $this->winner = "Game over!";
+    // }
 
     /**
      * Save point values to the record.
@@ -241,28 +241,6 @@ class DiceGame
         $this->computerThrows = [4, 5];
     }
 
-    // 
-    // /**
-    //  * Save point values to the record.
-    //  *
-    //  * @return void.
-    //  */
-    // public function testInterface()
-    // {
-    //     $rolls = 6;
-    //
-    //     $dice = new DiceHistogram();
-    //
-    //     for ($i = 0; $i < $rolls; $i++) {
-    //         $dice->roll();
-    //     }
-    //
-    //     $histogram = new Histogram();
-    //     $histogram->injectData($dice);
-    //
-    //     return $histogram;
-    // }
-    //
 
     /**
      * Save point values to the record.

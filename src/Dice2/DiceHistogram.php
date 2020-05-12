@@ -28,7 +28,7 @@ class DiceHistogram extends Dice implements HistogramInterface
      *
      * @return int the value of the rolled dice.
      */
-    public function rollDice2(int $throws = 1)
+    public function rollDice2()
     {
         // $this->serie[] = parent::roll();
         $serie[] = parent::roll();
