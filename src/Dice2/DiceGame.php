@@ -12,8 +12,6 @@ class DiceGame
      * @var DiceHand $diceHands     Array consisting of dices.
      * @var int $values     Array consisting of last roll of the dices.
      */
-    // private $dices;
-    // private $values;
     private $humanDices;
     private $computerDices;
     private $humanPlayerScore;
@@ -24,7 +22,6 @@ class DiceGame
     private $winner;
     private $humanThrows;
     private $computerThrows;
-
     private $humanHistogram;
     private $computerHistogram;
     private $riskyAiCounter;
@@ -73,11 +70,6 @@ class DiceGame
                 $this->humanHistogram->injectData($value);
                 // var_dump($value);
             }
-
-            // $this->humanHistogram;
-            // var_dump($this->humanThrows);
-            // var_dump($this->humanHistogram->getAsText(1, 6));
-            // var_dump($this->humanDices);
 
             $res = array_slice($this->humanThrows, -2);
             $this->humanLatestRoll = $res;
@@ -209,7 +201,7 @@ class DiceGame
     }
 
     /**
-     * Save point values to the record.
+     * If finish game this runs and adds Game Over string to $winner.
      *
      * @return void.
      */
@@ -222,62 +214,55 @@ class DiceGame
     /**
      * Save point values to the record.
      *
-     * @return void.
+     * @return string.
      */
     public function isWinner()
     {
         return $this->winner;
     }
 
-
     /**
      * Save point values to the record.
      *
-     * @return void.
+     * @return string.
      */
-    public function humanThrows()
+    public function setHumanThrows()
     {
-        // var_dump($this->humanHistogram->getAsText());
-        $this->humanHistogram->getSerie();
-        return $this->humanHistogram->getAsText();
-        // return $this->humanHistogram->getSerie();
-        // return implode(", ", $this->histogram->getSerie());
-        // return $this->humanThrows;
+        $this->humanThrows = [4, 5];
     }
 
     /**
      * Save point values to the record.
      *
-     * @return void.
+     * @return string.
      */
-    public function computerThrows()
+    public function setComputerThrows()
     {
-        // return $this->computerThrows;
-        return null;
+        $this->computerThrows = [4, 5];
     }
 
-
-    /**
-     * Save point values to the record.
-     *
-     * @return void.
-     */
-    public function testInterface()
-    {
-        $rolls = 6;
-
-        $dice = new DiceHistogram();
-
-        for ($i = 0; $i < $rolls; $i++) {
-            $dice->roll();
-        }
-
-        $histogram = new Histogram();
-        $histogram->injectData($dice);
-
-        return $histogram;
-    }
-
+    // 
+    // /**
+    //  * Save point values to the record.
+    //  *
+    //  * @return void.
+    //  */
+    // public function testInterface()
+    // {
+    //     $rolls = 6;
+    //
+    //     $dice = new DiceHistogram();
+    //
+    //     for ($i = 0; $i < $rolls; $i++) {
+    //         $dice->roll();
+    //     }
+    //
+    //     $histogram = new Histogram();
+    //     $histogram->injectData($dice);
+    //
+    //     return $histogram;
+    // }
+    //
 
     /**
      * Save point values to the record.

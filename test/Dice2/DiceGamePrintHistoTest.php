@@ -7,35 +7,46 @@ use PHPUnit\Framework\TestCase;
 /**
  * Test cases for class Dice.
  */
-class DiceEvaluateObjectTest extends TestCase
+class DiceGamePrintHistoTest extends TestCase
 {
     /**
-     * Construct object and check if roll method works
-     * by returning an array.
+     * Construct object and verify that the object has the expected
+     * properties. Use no arguments.
      */
-    public function testRollDice()
+    public function testPrintHumanHistogram()
     {
-        $dice = new Dice();
-        $this->assertInstanceOf("\Mipodi\Dice2\Dice", $dice);
+        $diceGame = new DiceGame();
+        $this->assertInstanceOf("\Mipodi\Dice2\DiceGame", $diceGame);
 
-        $res = $dice->roll();
+        $diceGame->play("doRoll");
+        $diceGame->setHumanThrows();
+        $res = $diceGame->printHumanHistogram(1, 8);
 
-        $this->assertIsArray($res);
+        $this->assertIsString($res);
+        // $res = $guess->tries();
+        // $exp = 6;
+        // $this->assertEquals($exp, $res);
     }
 
     /**
-     * Construct object and check if results method works
-     * by returning an array.
+     * Construct object and verify that the object has the expected
+     * properties. Use no arguments.
      */
-    public function testGetResults()
+    public function testPrintComputerHistogram()
     {
-        $dice = new Dice();
-        $this->assertInstanceOf("\Mipodi\Dice2\Dice", $dice);
+        $diceGame = new DiceGame();
+        $this->assertInstanceOf("\Mipodi\Dice2\DiceGame", $diceGame);
 
-        $res = $dice->results();
+        $diceGame->play("doRoll");
+        $diceGame->setComputerThrows();
+        $res = $diceGame->printComputerHistogram(1, 8);
 
-        $this->assertIsArray($res);
+        $this->assertIsString($res);
+        // $res = $guess->tries();
+        // $exp = 6;
+        // $this->assertEquals($exp, $res);
     }
+
     //
     // /**
     //  * Construct object and verify that the object has the expected

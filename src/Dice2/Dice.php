@@ -39,6 +39,7 @@ class Dice
     public function roll(int $throws = 1)
     {
         // $this->throwResults = [];
+        $throws = 1;
         for ($i = 0; $i < $throws; $i++) {
             $this->throwResults[] = rand(1, 6);
         }
