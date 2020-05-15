@@ -68,16 +68,16 @@ return [
         //     "url" => "style",
         //     "title" => "Välj stylesheet.",
         // ],
-        [
-            "text" => "Docs",
-            "url" => "dokumentation",
-            "title" => "Dokumentation av ramverk och liknande.",
-        ],
-        [
-            "text" => "Test &amp; Lek",
-            "url" => "lek",
-            "title" => "Testa och lek med test- och exempelprogram",
-        ],
+        // [
+        //     "text" => "Docs",
+        //     "url" => "dokumentation",
+        //     "title" => "Dokumentation av ramverk och liknande.",
+        // ],
+        // [
+        //     "text" => "Test &amp; Lek",
+        //     "url" => "lek",
+        //     "title" => "Testa och lek med test- och exempelprogram",
+        // ],
         [
             "text" => "Anax dev",
             "url" => "dev",
@@ -97,6 +97,11 @@ return [
             "text" => "Dice Deluxe",
             "url" => "dice-deluxe",
             "title" => "Play Dice Deluxe",
+        ],
+        [
+            "text" => "Movies",
+            "url" => "movies",
+            "title" => "Movies",
         ],
     ],
 ];

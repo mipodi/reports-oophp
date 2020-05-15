@@ -6,7 +6,7 @@ Hej!
 
 
 
-[FIGURE src="image/jellyfish.jpg" class="right" caption="En manet."]
+[FIGURE src="img/jellyfish.jpg" class="right" caption="En manet."]
 
 Det här är en me-sida i en kurs på Blekinge Tekniska Högskola och jag heter Julia Johansson. En me-sida funkar som en logg och reflektion kombinerat meda testmiljö under kursens gång.
 
