@@ -232,7 +232,7 @@ class MoviesController implements AppInjectableInterface
         $movieId = $this->app->session->get("movieId");
 
         $movieId = $request->getPost("movieId");
-        $doEdit = $request->getPost("doEdit");
+
         $doDelete = $request->getPost("doDelete");
         $doAdd = $request->getPost("doAdd");
         $doSave = $request->getPost("doSave");
