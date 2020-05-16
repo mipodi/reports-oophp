@@ -1,5 +1,5 @@
 <?php
-if (!$res) {
+if (!$resultset) {
     return;
 }
 ?>
@@ -12,7 +12,7 @@ if (!$res) {
         <th>Titel</th>
         <th>År</th>
     </tr>
-<?php $id = -1; foreach ($res as $row) :
+<?php $id = -1; foreach ($resultset as $row) :
     $id++; ?>
     <tr>
         <td><?= $id ?></td>

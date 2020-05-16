@@ -1,4 +1,14 @@
 <?php
+
+namespace Anax\View;
+
+/**
+ * Render content within an article.
+ */
+
+// Show incoming variables and view helper functions
+//echo showEnvironment(get_defined_vars(), get_defined_functions());
+
 if (!$resultset) {
     return;
 }
@@ -17,7 +27,7 @@ if (!$resultset) {
     <tr>
         <td><?= $id ?></td>
         <td><?= $row->id ?></td>
-        <td><img class="thumb" src="<?= $row->image ?>"></td>
+        <td><img class="thumb" src="<?= asset($row->image) ?>"></td>
         <td><?= $row->title ?></td>
         <td><?= $row->year ?></td>
     </tr>

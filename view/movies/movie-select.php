@@ -1,4 +1,19 @@
-<form method="post">
+<?php
+
+namespace Anax\View;
+
+/**
+ * Render content within an article.
+ */
+
+// Show incoming variables and view helper functions
+//echo showEnvironment(get_defined_vars(), get_defined_functions());
+
+// if (!$res) {
+//     return;
+// }
+
+?><form method="post">
     <fieldset>
     <legend>Select Movie</legend>
 
@@ -18,6 +33,6 @@
         <input type="submit" name="doEdit" value="Edit">
         <input type="submit" name="doDelete" value="Delete">
     </p>
-    <p><a href="?">Show all</a></p>
+    <a href="<?= url("movies/index") ?>">Show all</a>
     </fieldset>
 </form>

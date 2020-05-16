@@ -62,12 +62,13 @@ class MoviesController implements AppInjectableInterface
         // echo "HELLOOO";
         // return __METHOD__ . ", \$db is {$this->db}";
 
-        $title = "Movie database | oophp";
+        $title = "Movie database";
 
         $this->app->db->connect();
         $sql = "SELECT * FROM movie;";
         $res = $this->app->db->executeFetchAll($sql);
 
+        $this->app->page->add("movies/header");
         $this->app->page->add("movies/index", [
             "res" => $res,
         ]);
@@ -93,96 +94,42 @@ class MoviesController implements AppInjectableInterface
         // return __METHOD__ . ", \$db is {$this->db}";
     }
 
-
     /**
      * This is the index method action, it handles:
      * ANY METHOD mountpoint
      * ANY METHOD mountpoint/
      * ANY METHOD mountpoint/index
      *
-     * @return string
+     * @return object
      */
-    public function initAction() : object
+    public function searchtitleActionGet() : object
     {
-        // Deal with the action and return a response.
-        // echo "HELLOOO";
-        // return __METHOD__ . ", \$db is {$this->db}";
-        $this->app->session->set("diceGame", null);
-        $this->app->session->set("doRoll", null);
-        $this->app->session->set("doSave", null);
-        $this->app->session->set("doInit", null);
-        $this->app->session->set("res", null);
+        $this->app->db->connect();
+        // $searchTitle = "Pulp";
 
+        $request = new \Anax\Request\Request();
+        $request->init();
 
-        $diceGame = null;
-        $diceGame = new DiceGame();
+        $searchTitle = $request->getGet("searchTitle");
+        $resultset = 0;
 
-        $this->app->session->set("diceGame", $diceGame);
-
-        return $this->app->response->redirect("dice2/play");
-    }
-
-    /**
-     * This is the index method action, it handles:
-     * ANY METHOD mountpoint
-     * ANY METHOD mountpoint/
-     * ANY METHOD mountpoint/index
-     *
-     * @return string
-     */
-    public function playActionGet() : object
-    {
-        $title = "Play the game 2";
-        // $computerLatestRoll = null;
-        $humanLatestRoll = null;
-        $diceGame = $this->app->session->get("diceGame");
-
-        $gameStatus = $this->app->session->get("doRoll") ?? $this->app->session->get("doSave");
-        $diceGame->play($gameStatus);
-
-        $doInit = $this->app->session->get("doInit");
-        if ($doInit) {
-            return $this->app->response->redirect("dice2/init");
+        if ($searchTitle) {
+            $sql = "SELECT * FROM movie WHERE title LIKE ?;";
+            $resultset = $this->app->db->executeFetchAll($sql, [$searchTitle]);
         }
 
-        $tempScore = $diceGame->tempScore();
-        $humanScore = $diceGame->humanScore();
-        $computerScore = $diceGame->computerScore();
-        $humanLatestRoll = $diceGame->getHumanLatestRoll() ?? null;
-        $computerLatestRoll = $diceGame->getComputerLatestRoll() ?? null;
-        $winner = $diceGame->isWinner() ?? null;
-        $humanHistogram = null;
-        $computerHistogram = null;
-
-        // $histogram = $diceGame->testInterface() ?? null;
-        $doSave = $this->app->session->get("doSave");
-        $doRoll = $this->app->session->get("doRoll");
-
-        if ($doSave || $doRoll) {
-            $humanHistogram = $diceGame->printHumanHistogram(1, 8) ?? null;
-            $computerHistogram = $diceGame->printComputerHistogram(1, 8) ?? null;
-        } else {
-            $humanHistogram = null;
-            $computerHistogram = null;
-            // $histogram = null;
-        }
-
-        $data = [
-            "humanScore" => $humanScore,
-            "computerScore" => $computerScore,
-            "tempScore" => $tempScore,
-            "computerLatestRoll" => $computerLatestRoll,
-            "humanLatestRoll" => $humanLatestRoll,
-            "winner" => $winner,
-            "humanHistogram" => $humanHistogram,
-            "computerHistogram" => $computerHistogram
-        ];
-
-        $this->app->page->add("dice2/play", $data);
-        // $this->app->page->add("dice/debug");
+        $this->app->page->add("movies/header");
+        $this->app->page->add("movies/search-title", [
+            // "resultset" => $resultset,
+            "searchTitle" => $searchTitle
+        ]);
+        $this->app->page->add("movies/show-all", [
+            "resultset" => $resultset,
+            "searchTitle" => $searchTitle
+        ]);
 
         return $this->app->page->render([
-            "title" => $title,
+            // "title" => $title,
         ]);
     }
 
@@ -192,19 +139,134 @@ class MoviesController implements AppInjectableInterface
      * ANY METHOD mountpoint/
      * ANY METHOD mountpoint/index
      *
+     * @return object
+     */
+    public function searchyearActionGet() : object
+    {
+        $this->app->db->connect();
+        $request = new \Anax\Request\Request();
+        $request->init();
+
+        $year1 = $request->getGet("year1");
+        $year2 = $request->getGet("year2");
+
+        $resultset = 0;
+
+        if ($year1 && $year2) {
+            $sql = "SELECT * FROM movie WHERE year >= ? AND year <= ?;";
+            $resultset = $this->app->db->executeFetchAll($sql, [$year1, $year2]);
+        } elseif ($year1) {
+            $sql = "SELECT * FROM movie WHERE year >= ?;";
+            $resultset = $this->app->db->executeFetchAll($sql, [$year1]);
+        } elseif ($year2) {
+            $sql = "SELECT * FROM movie WHERE year <= ?;";
+            $resultset = $this->app->db->executeFetchAll($sql, [$year2]);
+        }
+
+        $this->app->page->add("movies/header");
+        $this->app->page->add("movies/search-year", [
+            // "resultset" => $resultset,
+            // "searchTitle" => $searchTitle
+        ]);
+        $this->app->page->add("movies/show-all", [
+            "resultset" => $resultset,
+        ]);
+
+        return $this->app->page->render([
+            // "title" => $title,
+        ]);
+    }
+
+
+
+    /**
+     * This is the index method action, it handles:
+     * ANY METHOD mountpoint
+     * ANY METHOD mountpoint/
+     * ANY METHOD mountpoint/index
+     *
+     * @return object
+     */
+    public function movieselectActionGet() : object
+    {
+        $this->app->db->connect();
+        $request = new \Anax\Request\Request();
+        $request->init();
+
+        $movieId = $request->getGet("movieId");
+        // var_dump($movieId);
+
+        $sql = "SELECT id, title FROM movie;";
+        $movies = $this->app->db->executeFetchAll($sql);
+
+        $this->app->session->set("movieId", $movieId);
+        // var_dump($movieId);
+
+        $this->app->page->add("movies/header");
+        $this->app->page->add("movies/movie-select", [
+            // "resultset" => $resultset,
+            "movies" => $movies
+        ]);
+
+        return $this->app->page->render([
+            // "title" => $title,
+        ]);
+    }
+
+
+
+    /**
+     * This is the index method action, it handles:
+     * ANY METHOD mountpoint
+     * ANY METHOD mountpoint/
+     * ANY METHOD mountpoint/index
+     *
      * @return string
      */
-    public function playActionPost() : object
+    public function movieselectActionPost() : object
     {
-        $doSave = $this->app->request->getPost("doSave");
-        $doRoll = $this->app->request->getPost("doRoll");
-        $doInit = $this->app->request->getPost("doInit");
+        $this->app->db->connect();
+        $request = new \Anax\Request\Request();
+        $request->init();
 
-        $this->app->session->set("doSave", $doSave);
-        $this->app->session->set("doRoll", $doRoll);
-        $this->app->session->set("doInit", $doInit);
+        $movieId = $this->app->session->get("movieId");
 
-        return $this->app->response->redirect("dice2/play");
+        $movieId = $request->getPost("movieId");
+        $doEdit = $request->getPost("doEdit");
+        $doDelete = $request->getPost("doDelete");
+        $doAdd = $request->getPost("doAdd");
+        $doSave = $request->getPost("doSave");
+
+        if ($doSave) {
+            $movieId    = $request->getPost("movieId");
+            $movieTitle = $request->getPost("movieTitle");
+            $movieYear  = $request->getPost("movieYear");
+            $movieImage = $request->getPost("movieImage");
+
+            $sql = "UPDATE movie SET title = ?, year = ?, image = ? WHERE id = ?;";
+            $this->app->db->execute($sql, [$movieTitle, $movieYear, $movieImage, $movieId]);
+        } elseif ($doDelete) {
+            $sql = "DELETE FROM movie WHERE id = ?;";
+            $this->app->db->execute($sql, [$movieId]);
+            return $this->app->response->redirect("movies/movie-select");
+        } elseif ($doAdd) {
+            $sql = "INSERT INTO movie (title, year, image) VALUES (?, ?, ?);";
+            $this->app->db->execute($sql, ["A title", 2017, "img/noimage.png"]);
+            $movieId = $this->app->db->lastInsertId();
+        }
+
+        $sql = "SELECT * FROM movie WHERE id = ?;";
+        $movie = $this->app->db->executeFetchAll($sql, [$movieId]);
+        $movie = $movie[0];
+
+        $this->app->page->add("movies/header");
+        $this->app->page->add("movies/movie-edit", [
+            "movie" => $movie
+        ]);
+
+        return $this->app->page->render([
+            // "title" => $title,
+        ]);
     }
 
 
