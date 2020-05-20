@@ -104,5 +104,15 @@ return [
             "url" => "movies",
             "title" => "Movies",
         ],
+        [
+            "text" => "Text filter",
+            "url" => "textfilter",
+            "title" => "Textfilter",
+        ],
+        [
+            "text" => "CMS",
+            "url" => "cms",
+            "title" => "Cms",
+        ],
     ],
 ];

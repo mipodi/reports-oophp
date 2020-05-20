@@ -78,11 +78,11 @@ return [
         //     "url" => "lek",
         //     "title" => "Testa och lek med test- och exempelprogram",
         // ],
-        [
-            "text" => "Anax dev",
-            "url" => "dev",
-            "title" => "Anax development utilities",
-        ],
+        // [
+        //     "text" => "Anax dev",
+        //     "url" => "dev",
+        //     "title" => "Anax development utilities",
+        // ],
         [
             "text" => "Guess game",
             "url" => "guess-game",
@@ -102,6 +102,16 @@ return [
             "text" => "Movies",
             "url" => "movies",
             "title" => "Movies",
+        ],
+        [
+            "text" => "Text filter",
+            "url" => "textfilter",
+            "title" => "Textfilter",
+        ],
+        [
+            "text" => "CMS",
+            "url" => "cms",
+            "title" => "Cms",
         ],
     ],
 ];
