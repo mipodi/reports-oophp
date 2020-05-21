@@ -48,8 +48,8 @@ namespace Anax\View;
 
     <p>
         <button type="submit" name="doSave"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
-        <button type="reset"><i class="fa fa-undo" aria-hidden="true"></i> Reset</button>
-        <button type="submit" name="doDelete"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+        <!-- <button type="reset"><i class="fa fa-undo" aria-hidden="true"></i> Reset</button> -->
+        <!-- <button type="submit" name="doDelete"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button> -->
     </p>
     </fieldset>
 </form>

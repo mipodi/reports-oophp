@@ -147,7 +147,7 @@ class Content
      */
     public function showBlog()
     {
-        $sql = 'SELECT *, DATE_FORMAT(COALESCE(updated, published), "%Y-%m-%dT%TZ") AS published_iso8601, DATE_FORMAT(COALESCE(updated, published), "%Y-%m-%d") AS published FROM content WHERE type=? ORDER BY published DESC;';
+        $sql = 'SELECT *, DATE_FORMAT(COALESCE(updated, published), "%Y-%m-%dT%TZ") AS published_iso8601, DATE_FORMAT(COALESCE(updated, published), "%Y-%m-%d") AS published FROM content WHERE type=? AND (deleted IS NULL OR deleted > NOW()) AND published <= NOW() ORDER BY published DESC;';
         $this->db->connect();
         $resultset = $this->db->executeFetchAll($sql, ["post"]);
         return $resultset;
